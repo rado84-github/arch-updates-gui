@@ -1,2 +1,163 @@
-# arch-updates-gui
-A simple python GUI tool that checks for updates and shows them
+<img width="708" height="635" alt="Picture_created_02-03-2026_03-26-06" src="https://github.com/user-attachments/assets/801f3d8c-561a-4669-b76a-ac74e5f85e5e" />
+
+# Screenshot of the tool
+May devs don't include a screenshot of their own creation and you gotta turn Google upside down till you find something. I won't be like this, so here's a screenshot of the GTK3 version with my dark theme.
+
+# Arch Updates simple GUI tool
+A simple python GUI tool that checks for updates and shows them. This tool is simply for information, intended to replace tools like Octopi.
+It's written in Python3 and like everything else I share in my repositories, it's FOSS with MIT license meaning you're free to do whatever you want with it, including change the code or even completely rewrite it.
+
+# What the tool DOESN'T & CAN'T do?
+Update the packages. It's only informational, it can't do anything you didn't tell it to do.
+
+# What the tool CAN do?
+When you run it, it automatically runs the command 'checkupdates' and displays all the packages waiting to be updated.
+It displays package name, current version and new version.
+The tool's collumns' sizes are fixed (but you can edit them in the '.py' file yourself, if you want. I suppose I could have added an option to drag and resize these collumns but I wanted to keep it as simple as possible on purpose. The less complications in the code - the less likely for something to stop working.
+
+# Dependencies Arch Updates GUI
+The tool has no dependencies (aside from the GTK3/GTK4/QT5/QT6 frameworks). And even when it comes to the frameworks themselves, it's only about their big version, meaning that it's enough to have ANY version installed of the listed frameworks. Well, you gotta have python3 installed as well but since it's usually pulled during the installation of Arch, I don't consider it as a real dependency.
+
+But if you really need to know what you need for the tool to work:
+• GTK3/GTK4/QT5/QT6
+• Python3
+
+# No compiling - full transparency
+Python is one of the few programming languages that can work without being compiled, therefore the .py files don't need to be compiled and can be edited at anytime by anyone!
+
+# Languages
+Currently (and probably forever) the languages available are Bulgarian (because I'm Bulgarian :) ) and English. For each language you're gonna have to download the archive with the desired suffix "_EN" or "_BG".
+If your language isn't there, you can edit the 3 strings and translate them to your target language.
+
+# Interfaces
+The interfaces of the tool are GTK3 and QT6.
+I have only tested the GTK3 version and it works perfectly!
+The GTK3 version can easily be changed into GTK4 by simply changing the number "3.0" of this line:
+
+```
+gi.require_version("Gtk", "3.0")
+```
+to be "4.0" and that's it.
+
+# The QT6 version hasn't been tested
+Feel free to do that, if you're using Plasma.
+In the same manner the QT6 version SHOULD be possible to be changed into QT5 by changing the number of these lines:
+
+```
+PyQt6.QtWidgets
+PyQt6.QtCore
+```
+and make them look like this:
+
+```
+PyQt5.QtWidgets
+PyQt5.QtCore
+```
+BUT!!! take a note this is just a theory. I'm not a big fan of the QT framework, so I've never tested any of it - not the QT6 tool itself, not the possibility to change it into QT5.
+
+# Source code
+The following lines are THE ENTIRE source code of the GTK3 English version:
+
+```
+#!/usr/bin/env python3
+import gi
+import subprocess
+import re
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+
+PACMAN_CONF = "/etc/pacman.conf"
+
+
+def read_ignorepkg():
+    ignore = set()
+    pattern = re.compile(r"^\s*IgnorePkg\s*=\s*(.*)$")
+
+    with open(PACMAN_CONF, "r") as f:
+        for line in f:
+            m = pattern.match(line)
+            if m:
+                pkgs = m.group(1).split()
+                ignore.update(pkgs)
+
+    return ignore
+
+
+def get_updates():
+    try:
+        output = subprocess.check_output(["checkupdates"], text=True)
+    except subprocess.CalledProcessError:
+        return []
+
+    updates = []
+    for line in output.strip().split("\n"):
+        if not line.strip():
+            continue
+
+        # Format: pkgname oldver -> newver
+        parts = line.split()
+        if len(parts) >= 4 and parts[2] == "->":
+            pkg = parts[0]
+            oldver = parts[1]
+            newver = parts[3]
+            updates.append((pkg, oldver, newver))
+
+    return updates
+
+
+class UpdateWindow(Gtk.Window):
+    def __init__(self):
+        Gtk.Window.__init__(self, title="Arch Updates GTK3")
+        self.set_default_size(700, 600)
+
+        ignore = read_ignorepkg()
+        updates = [u for u in get_updates() if u[0] not in ignore]
+
+        liststore = Gtk.ListStore(str, str, str)
+        for pkg, old, new in updates:
+            liststore.append([pkg, old, new])
+
+        treeview = Gtk.TreeView(model=liststore)
+
+        renderer = Gtk.CellRendererText()
+
+        col1 = Gtk.TreeViewColumn("Package name", renderer, text=0)
+        col2 = Gtk.TreeViewColumn("Current version", renderer, text=1)
+        col3 = Gtk.TreeViewColumn("New version", renderer, text=2)
+
+        col1.set_fixed_width(300)
+        col2.set_fixed_width(200)
+        col3.set_fixed_width(200)
+
+        treeview.append_column(col1)
+        treeview.append_column(col2)
+        treeview.append_column(col3)
+
+        scroll = Gtk.ScrolledWindow()
+        scroll.add(treeview)
+
+        self.add(scroll)
+
+
+def main():
+    win = UpdateWindow()
+    win.connect("destroy", Gtk.main_quit)
+    win.show_all()
+    Gtk.main()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+# .desktop file & an icon
+I decided to leave that to you because what I like for an icon you may or may not like.
+
+# Some ideas
+Since the tool is run by the bash script that is included in the archive, you can:
+• set it to autostart with the system
+• set it to run at specific intervals, if you know how to use cronjob (I don't)
+
+# Questions and problems
+If you have any questions or problems, post an issue and I'll answer/try to help.
