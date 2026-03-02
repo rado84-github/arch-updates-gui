@@ -7,20 +7,45 @@ May devs don't include a screenshot of their own creation and you gotta turn Goo
 A simple python GUI tool that checks for updates and shows them. This tool is simply for information, intended to replace tools like Octopi.
 It's written in Python3 and like everything else I share in my repositories, it's FOSS with MIT license meaning you're free to do whatever you want with it, including change the code or even completely rewrite it.
 
+# What is the tool for?
+Arch Updates GUI is for Arch and all Arch-based distros that use pacman as a package manager.
+
 # What the tool DOESN'T & CAN'T do?
 Update the packages. It's only informational, it can't do anything you didn't tell it to do.
+The tool CAN'T check for updates in AUR but I suppose you could make it look in there too, if you want.
 
 # What the tool CAN do?
 When you run it, it automatically runs the command 'checkupdates' and displays all the packages waiting to be updated.
 It displays package name, current version and new version.
 The tool's collumns' sizes are fixed (but you can edit them in the '.py' file yourself, if you want. I suppose I could have added an option to drag and resize these collumns but I wanted to keep it as simple as possible on purpose. The less complications in the code - the less likely for something to stop working.
 
-# Dependencies Arch Updates GUI
-The tool has no dependencies (aside from the GTK3/GTK4/QT5/QT6 frameworks). And even when it comes to the frameworks themselves, it's only about their big version, meaning that it's enough to have ANY version installed of the listed frameworks. Well, you gotta have python3 installed as well but since it's usually pulled during the installation of Arch, I don't consider it as a real dependency.
+# What the tool does?
+Aside from the checking updates, Arch Updates GUI reads the
+```
+IgnorePkg = 
+```
+line in /etc/pacman.conf.
+If it finds any package mentioned there, the tool WON'T show it in the list of packages waiting to be updated. If you wanna see that package there, you're gonna have to remove it from IgnorePkg first.
 
-But if you really need to know what you need for the tool to work:
-• GTK3/GTK4/QT5/QT6
-• Python3
+# Dependencies (more accurate)
+
+The tool has only a few dependencies, and none of them require a specific version:
+
+For the GTK3/GTK4 version:
+
+    Python 3
+
+    PyGObject (for GTK3/GTK4)
+
+For the Qt5/Qt6 version:
+
+    Python 3
+
+    PyQt5 or PySide2 (Qt5)
+
+    PyQt6 or PySide6 (Qt6)
+
+Any installed version of these frameworks is fine — the tool does not depend on exact versions.
 
 # No compiling - full transparency
 Python is one of the few programming languages that can work without being compiled, therefore the .py files don't need to be compiled and can be edited at anytime by anyone!
@@ -158,6 +183,9 @@ I decided to leave that to you because what I like for an icon you may or may no
 Since the tool is run by the bash script that is included in the archive, you can:
 • set it to autostart with the system
 • set it to run at specific intervals, if you know how to use cronjob (I don't)
+
+# Why this tool exists?
+Because I couldn't find anything better that wasn't seriously outdated and that would show me only what I wanted - without any bloated functions. Octopi is outdated and unclear, 99% of its functions and options don't work properly, the pamac series are pretty much the same - the interface works but not much else of them.
 
 # Questions and problems
 If you have any questions or problems, post an issue and I'll answer/try to help.
