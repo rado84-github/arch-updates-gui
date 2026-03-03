@@ -1,5 +1,6 @@
 # Screenshots of the tool
-Many devs don't include a screenshot of their own creation and you gotta turn Google upside down till you find something. I won't be like this, so here's a screenshot of the GTK3 version with my dark theme.
+Many devs don't include a screenshot of their own creation and you gotta turn Google upside down till you find something. I won't be like this, so here's a screenshot of the GTK3 & the QT6 versions with my dark theme. My desktop is Cinnamon, so naturally I prefer the GTK3 theme. On the first screenshot it's the QT6 version but well integrated with the GTK theme.
+
 The screenshots are in Bulgarian but I've uploaded English versions as well!
 
 QT6 version:
