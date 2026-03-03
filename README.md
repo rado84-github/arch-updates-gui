@@ -1,8 +1,16 @@
-<img width="906" height="974" alt="Picture_created_03-03-2026_01-59-03" src="https://github.com/user-attachments/assets/0b09bdbb-740e-4e40-bd93-9a220dc8abbd" />
-
-
-# Screenshot of the tool
+# Screenshots of the tool
 Many devs don't include a screenshot of their own creation and you gotta turn Google upside down till you find something. I won't be like this, so here's a screenshot of the GTK3 version with my dark theme.
+The screenshots are in Bulgarian but I've uploaded English versions as well!
+
+QT6 version:
+
+<img width="901" height="979" alt="Picture_created_03-03-2026_18-58-28" src="https://github.com/user-attachments/assets/7671c3e7-c007-4e3e-b864-f7f80a2e505c" />
+
+=========================
+
+GTK3 version:
+
+<img width="902" height="984" alt="Picture_created_03-03-2026_18-57-38" src="https://github.com/user-attachments/assets/de8b0c6c-68d3-4507-b77a-c06596b71223" />
 
 # Arch Updates simple GUI tool
 A simple python GUI tool that checks for updates and shows them. This tool is simply for information, intended to replace tools like Octopi.
