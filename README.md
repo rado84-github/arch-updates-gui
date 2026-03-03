@@ -79,7 +79,11 @@ and make them look like this:
 PyQt5.QtWidgets
 PyQt5.QtCore
 ```
-BUT!!! take a note this is just a theory. I'm not a big fan of the QT framework, so I've never tested any of it - not the QT6 tool itself, not the possibility to change it into QT5.
+I finally figured it out why the Qt6 version refused to launch and now I fixed it! It requires for you to install this package:
+```
+extra/python-pyqt6
+```
+and after that it runs just fine! So enjoy the tool in Plasma 6! :D 
 
 # .desktop file & an icon
 I decided to leave that to you because what I like for an icon you may or may not like.
