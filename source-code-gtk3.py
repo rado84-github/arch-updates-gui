@@ -89,7 +89,7 @@ def get_updates():
 
 class UpdateWindow(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self, title="Arch & AUR Updates Manager")
+        Gtk.Window.__init__(self, title="Arch & AUR Updates Checker")
         self.set_default_size(900, 950) # (width, height)
         self.set_resizable(False)
 
@@ -103,13 +103,11 @@ class UpdateWindow(Gtk.Window):
         self.header_box.set_margin_start(10)
         self.header_box.set_margin_end(10)
         
-        self.refresh_btn = Gtk.Button(label="Обнови")
+        self.refresh_btn = Gtk.Button(label="Refresh list")
         self.refresh_btn.connect("clicked", self.on_refresh_clicked)
-        self.header_box.pack_start(self.refresh_btn, False, False, 0)
+        self.header_box.pack_start(self.refresh_btn, True, True, 0)
         
-        self.spinner = Gtk.Spinner()
-        self.header_box.pack_start(self.spinner, False, False, 0)
-        
+      
         self.main_box.pack_start(self.header_box, False, False, 0)
 
         # TreeView
@@ -117,7 +115,7 @@ class UpdateWindow(Gtk.Window):
         self.liststore.set_sort_column_id(0, Gtk.SortType.ASCENDING)
         self.treeview = Gtk.TreeView(model=self.liststore)
         
-        columns = ["Пакет", "Текуща версия", "Нова версия", "Източник"]
+        columns = ["Package", "Current version", "New version", "Repo"]
         for i, title in enumerate(columns):
             renderer = Gtk.CellRendererText()
             column = Gtk.TreeViewColumn(title, renderer, text=i)
@@ -149,7 +147,6 @@ class UpdateWindow(Gtk.Window):
     def refresh_updates(self):
         self.liststore.clear()
         self.refresh_btn.set_sensitive(False)
-        self.spinner.start()
         
         # Обновяваме данните
         ignore = read_ignorepkg()
@@ -158,7 +155,6 @@ class UpdateWindow(Gtk.Window):
         for up in updates:
             self.liststore.append(list(up))
             
-        self.spinner.stop()
         self.refresh_btn.set_sensitive(True)
 
     def on_refresh_clicked(self, widget):
