@@ -35,16 +35,17 @@ The tool has only a few dependencies, and none of them require a specific versio
 For the GTK3/GTK4 version:
 
     Python 3
-
     PyGObject (for GTK3/GTK4)
+    gtk3
+    gtk4    
 
 For the Qt5/Qt6 version:
 
     Python 3
-
     PyQt5 or PySide2 (Qt5)
-
     PyQt6 or PySide6 (Qt6)
+    extra/python-pyqt5
+    extra/python-pyqt6
 
 Any installed version of these frameworks is fine — the tool does not depend on exact versions.
 
@@ -64,17 +65,6 @@ The GTK3 version can easily be changed into GTK4 by simply changing the number "
 gi.require_version("Gtk", "3.0")
 ```
 to be "4.0" and that's it.
-
-# QT6 version dependencies:
-
-```
-extra/python-pyqt6
-```
-# QT5 version (if you choose to turn it into a QT5 program) dependencies:
-
-```
-extra/python-pyqt5
-```
 
 # .desktop file & an icon
 I decided to leave that to you because what I like for an icon you may or may not like.
