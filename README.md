@@ -37,6 +37,8 @@ IgnorePkg =
 line in /etc/pacman.conf.
 If it finds any package mentioned there, the tool WON'T show it in the list of packages waiting to be updated. If you wanna see that package there, you're gonna have to remove it from IgnorePkg first.
 
+# An important note: if it doesn't display any packages from AUR, you need to open the .py file, find the word "trizen" and replace it with the AUR helper you're using!!
+
 # Dependencies (more accurate)
 
 The tool has only a few dependencies, and none of them require a specific version:
