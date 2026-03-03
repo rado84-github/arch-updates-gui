@@ -65,25 +65,16 @@ gi.require_version("Gtk", "3.0")
 ```
 to be "4.0" and that's it.
 
-# The QT6 version hasn't been tested
-Feel free to do that, if you're using Plasma.
-In the same manner the QT6 version SHOULD be possible to be changed into QT5 by changing the number of these lines:
+# QT6 version dependencies:
 
-```
-PyQt6.QtWidgets
-PyQt6.QtCore
-```
-and make them look like this:
-
-```
-PyQt5.QtWidgets
-PyQt5.QtCore
-```
-I finally figured it out why the Qt6 version refused to launch and now I fixed it! It requires for you to install this package:
 ```
 extra/python-pyqt6
 ```
-and after that it runs just fine! So enjoy the tool in Plasma 6! :D 
+# QT5 version (if you choose to turn it into a QT5 program) dependencies:
+
+```
+extra/python-pyqt5
+```
 
 # .desktop file & an icon
 I decided to leave that to you because what I like for an icon you may or may not like.
