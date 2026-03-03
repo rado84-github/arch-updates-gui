@@ -1,4 +1,5 @@
-<img width="708" height="635" alt="Picture_created_02-03-2026_03-26-06" src="https://github.com/user-attachments/assets/801f3d8c-561a-4669-b76a-ac74e5f85e5e" />
+<img width="906" height="974" alt="Picture_created_03-03-2026_01-59-03" src="https://github.com/user-attachments/assets/0b09bdbb-740e-4e40-bd93-9a220dc8abbd" />
+
 
 # Screenshot of the tool
 Many devs don't include a screenshot of their own creation and you gotta turn Google upside down till you find something. I won't be like this, so here's a screenshot of the GTK3 version with my dark theme.
